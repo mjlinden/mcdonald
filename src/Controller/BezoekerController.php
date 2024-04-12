@@ -61,6 +61,7 @@ class BezoekerController extends AbstractController
         $product=$entityManager->getRepository(Product::class)->find($id);
         $entityManager->remove($product);
         $entityManager->flush();
+        $this->addFlash('success',"Product is verwijderd");
         return $this->redirectToRoute('app_products');
     }
     #[Route('/update/product/{id}', name: 'update_product')]
@@ -80,7 +81,7 @@ class BezoekerController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
             $name=$product->getName();
-            $this->addFlash('success',"Product $name is toegevoegd");
+            $this->addFlash('success',"Product $name is aangepast");
             return $this->redirectToRoute('app_products')  ;
         }
 
